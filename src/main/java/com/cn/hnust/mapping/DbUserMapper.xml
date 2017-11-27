@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.hnust.dao.DbUserDao" >
+  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.DbUser" >
+    <id column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="remarkcode1" property="remarkcode1" jdbcType="VARCHAR" />
+    <result column="remarkcode2" property="remarkcode2" jdbcType="VARCHAR" />
+    <result column="remarkcode3" property="remarkcode3" jdbcType="VARCHAR" />
+    <result column="remarkcode4" property="remarkcode4" jdbcType="VARCHAR" />
+    <result column="remarkcode5" property="remarkcode5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    userid, username, password, usertype, tel, sex, email, address, remarkcode1, remarkcode2, 
+    remarkcode3, remarkcode4, remarkcode5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cn.hnust.pojo.DbUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from db_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from db_user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from db_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByUserTel" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from db_user
+    where tel = #{tel,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByUserEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from db_user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from db_user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cn.hnust.pojo.DbUserExample" >
+    delete from db_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <!-- <insert id="insert" parameterType="com.cn.hnust.pojo.DbUser" >
+    insert into db_user (userid, username, password, 
+      usertype, tel, sex, 
+      email, address, remarkcode1, 
+      remarkcode2, remarkcode3, remarkcode4, 
+      remarkcode5)
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{remarkcode1,jdbcType=VARCHAR}, 
+      #{remarkcode2,jdbcType=VARCHAR}, #{remarkcode3,jdbcType=VARCHAR}, #{remarkcode4,jdbcType=VARCHAR}, 
+      #{remarkcode5,jdbcType=VARCHAR})
+  </insert> -->
+  <insert id="insert" parameterType="com.cn.hnust.pojo.DbUser" >
+    insert into db_user (userid, username, password, tel,email,sex)
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR} ,#{sex,jdbcType=VARCHAR})
+ 
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.DbUser" >
+    insert into db_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="remarkcode1 != null" >
+        remarkcode1,
+      </if>
+      <if test="remarkcode2 != null" >
+        remarkcode2,
+      </if>
+      <if test="remarkcode3 != null" >
+        remarkcode3,
+      </if>
+      <if test="remarkcode4 != null" >
+        remarkcode4,
+      </if>
+      <if test="remarkcode5 != null" >
+        remarkcode5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode1 != null" >
+        #{remarkcode1,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode2 != null" >
+        #{remarkcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode3 != null" >
+        #{remarkcode3,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode4 != null" >
+        #{remarkcode4,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode5 != null" >
+        #{remarkcode5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cn.hnust.pojo.DbUserExample" resultType="java.lang.Integer" >
+    select count(*) from db_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update db_user
+    <set >
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertype != null" >
+        usertype = #{record.usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkcode1 != null" >
+        remarkcode1 = #{record.remarkcode1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkcode2 != null" >
+        remarkcode2 = #{record.remarkcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkcode3 != null" >
+        remarkcode3 = #{record.remarkcode3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkcode4 != null" >
+        remarkcode4 = #{record.remarkcode4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkcode5 != null" >
+        remarkcode5 = #{record.remarkcode5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update db_user
+    set userid = #{record.userid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      usertype = #{record.usertype,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      remarkcode1 = #{record.remarkcode1,jdbcType=VARCHAR},
+      remarkcode2 = #{record.remarkcode2,jdbcType=VARCHAR},
+      remarkcode3 = #{record.remarkcode3,jdbcType=VARCHAR},
+      remarkcode4 = #{record.remarkcode4,jdbcType=VARCHAR},
+      remarkcode5 = #{record.remarkcode5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.DbUser" >
+    update db_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        usertype = #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode1 != null" >
+        remarkcode1 = #{remarkcode1,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode2 != null" >
+        remarkcode2 = #{remarkcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode3 != null" >
+        remarkcode3 = #{remarkcode3,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode4 != null" >
+        remarkcode4 = #{remarkcode4,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode5 != null" >
+        remarkcode5 = #{remarkcode5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.DbUser" >
+    update db_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      remarkcode1 = #{remarkcode1,jdbcType=VARCHAR},
+      remarkcode2 = #{remarkcode2,jdbcType=VARCHAR},
+      remarkcode3 = #{remarkcode3,jdbcType=VARCHAR},
+      remarkcode4 = #{remarkcode4,jdbcType=VARCHAR},
+      remarkcode5 = #{remarkcode5,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.hnust.dao.userinfo_dbMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.hnust.pojo.userinfo_db" >
+    <id column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="remarkcode1" property="remarkcode1" jdbcType="VARCHAR" />
+    <result column="remarkcode2" property="remarkcode2" jdbcType="VARCHAR" />
+    <result column="remarkcode3" property="remarkcode3" jdbcType="VARCHAR" />
+    <result column="remarkcode4" property="remarkcode4" jdbcType="VARCHAR" />
+    <result column="remarkcode5" property="remarkcode5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userid, username, password, usertype, tel, sex, email, address, remarkcode1, remarkcode2, 
+    remarkcode3, remarkcode4, remarkcode5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo_db
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from userinfo_db
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cn.hnust.pojo.userinfo_db" >
+    insert into userinfo_db (userid, username, password, 
+      usertype, tel, sex, 
+      email, address, remarkcode1, 
+      remarkcode2, remarkcode3, remarkcode4, 
+      remarkcode5)
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{remarkcode1,jdbcType=VARCHAR}, 
+      #{remarkcode2,jdbcType=VARCHAR}, #{remarkcode3,jdbcType=VARCHAR}, #{remarkcode4,jdbcType=VARCHAR}, 
+      #{remarkcode5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.hnust.pojo.userinfo_db" >
+    insert into userinfo_db
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="remarkcode1 != null" >
+        remarkcode1,
+      </if>
+      <if test="remarkcode2 != null" >
+        remarkcode2,
+      </if>
+      <if test="remarkcode3 != null" >
+        remarkcode3,
+      </if>
+      <if test="remarkcode4 != null" >
+        remarkcode4,
+      </if>
+      <if test="remarkcode5 != null" >
+        remarkcode5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode1 != null" >
+        #{remarkcode1,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode2 != null" >
+        #{remarkcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode3 != null" >
+        #{remarkcode3,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode4 != null" >
+        #{remarkcode4,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode5 != null" >
+        #{remarkcode5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.hnust.pojo.userinfo_db" >
+    update userinfo_db
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        usertype = #{usertype,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode1 != null" >
+        remarkcode1 = #{remarkcode1,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode2 != null" >
+        remarkcode2 = #{remarkcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode3 != null" >
+        remarkcode3 = #{remarkcode3,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode4 != null" >
+        remarkcode4 = #{remarkcode4,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkcode5 != null" >
+        remarkcode5 = #{remarkcode5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.hnust.pojo.userinfo_db" >
+    update userinfo_db
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      remarkcode1 = #{remarkcode1,jdbcType=VARCHAR},
+      remarkcode2 = #{remarkcode2,jdbcType=VARCHAR},
+      remarkcode3 = #{remarkcode3,jdbcType=VARCHAR},
+      remarkcode4 = #{remarkcode4,jdbcType=VARCHAR},
+      remarkcode5 = #{remarkcode5,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>
